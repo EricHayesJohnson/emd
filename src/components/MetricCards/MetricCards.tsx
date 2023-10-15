@@ -48,7 +48,9 @@ const MetricCards: React.FC<MetricCardsProps> = ({
                     </Text>
                 </Tooltip>
                 <div style={styles.metricCardNumber}>
-                    {currentStreak ? currentStreak : emptyData}
+                    {currentStreak || currentStreak === 0
+                        ? currentStreak
+                        : emptyData}
                 </div>
             </div>
         </div>
