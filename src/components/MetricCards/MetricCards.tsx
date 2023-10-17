@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Tooltip } from '@shopify/polaris';
 import { MetricCardsProps } from '../../types';
+import { useIsMobile } from '../../hooks/useIsMobile';
 
 import { styles } from './MetricCards.style';
 
@@ -8,10 +9,17 @@ const MetricCards: React.FC<MetricCardsProps> = ({
     currentRatio,
     currentStreak,
 }: MetricCardsProps) => {
+    const isMobile = useIsMobile();
     const emptyData = '---';
     return (
-        <div style={styles.metricCardsWrapper}>
-            <div style={styles.metricCard}>
+        <div
+            style={
+                isMobile
+                    ? styles.metricCardsWrapperMobile
+                    : styles.metricCardsWrapper
+            }
+        >
+            <div style={isMobile ? styles.metricCardMobile : styles.metricCard}>
                 <Tooltip
                     hasUnderline={true}
                     content={
@@ -31,7 +39,7 @@ const MetricCards: React.FC<MetricCardsProps> = ({
                     {currentRatio ? `${currentRatio}%` : emptyData}
                 </div>
             </div>
-            <div style={styles.metricCard}>
+            <div style={isMobile ? styles.metricCardMobile : styles.metricCard}>
                 <Tooltip
                     hasUnderline={true}
                     content={

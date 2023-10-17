@@ -7,6 +7,12 @@ const metricCardsWrapper = {
     height: '8.5rem',
 } as const;
 
+const metricCardsWrapperMobile = {
+    ...metricCardsWrapper,
+    margin: '0px',
+    marginTop: tokens.space['space-4'],
+} as const;
+
 const metricCard = {
     display: 'flex',
     flex: '1',
@@ -14,10 +20,14 @@ const metricCard = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: tokens.space['space-16'],
     background: tokens.color['color-bg'],
     margin: tokens.space['space-2'],
     borderRadius: tokens.border['border-radius-2'],
+} as const;
+
+const metricCardMobile = {
+    ...metricCard,
+    margin: tokens.space['space-1'],
 } as const;
 
 const metricCardNumber = {
@@ -28,6 +38,8 @@ const metricCardNumber = {
 
 export const styles = {
     metricCardsWrapper,
+    metricCardsWrapperMobile,
     metricCard,
+    metricCardMobile,
     metricCardNumber,
 };
