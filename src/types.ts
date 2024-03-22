@@ -22,6 +22,9 @@ export type SummaryPageData = {
         numDaysDrills?: number;
         numDaysTools?: number;
         numDaysNothing?: number;
+        lastRowId?: number;
+        lastDateAsString?: string;
+        isTodayInDb?: boolean;
     };
 };
 

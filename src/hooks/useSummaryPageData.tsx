@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { DBTable, supabase } from '../database/client';
 import differenceInDays from 'date-fns/differenceInDays';
 import { ChartDataDbResponse, SummaryPageData, Task } from '../types';
+import { todayFormatForDb } from '../utils/dateUtils';
 
 const useSummaryPageData = (): SummaryPageData => {
     const [dataFromDb, setDataFromDb] = useState<ChartDataDbResponse[] | null>(
@@ -29,6 +30,12 @@ const useSummaryPageData = (): SummaryPageData => {
 
     const startDate = sortedData?.[0]?.created_at || '';
     const endDate = sortedData?.[sortedData.length - 1]?.created_at || '';
+    const lastRowId = sortedData?.[sortedData.length - 1]?.id || 0;
+    const lastDateAsString =
+        sortedData?.[sortedData.length - 1]?.created_at || '';
+    const isTodayInDb = Boolean(
+        dataFromDb?.find((el) => el.created_at === todayFormatForDb())
+    );
 
     const totalDays = dataFromDb?.length || 0;
     const numDaysProjects =
@@ -43,14 +50,14 @@ const useSummaryPageData = (): SummaryPageData => {
     const allDevDays = numDaysProjects + numDaysDrills + numDaysTools;
     const currentRatio = Math.trunc((allDevDays / totalDays) * 100);
 
-    const getMosteRecentDayOff = (): string => {
+    const getMostRecentDayOff = (): string => {
         const daysOff = (sortedData || [])
             .filter((el) => el.task === Task.NOTHING)
             .map((el) => el.created_at);
         return daysOff.length > 0 ? daysOff[daysOff.length - 1] : '';
     };
 
-    const lastDayOff = getMosteRecentDayOff();
+    const lastDayOff = getMostRecentDayOff();
     const currentStreak = differenceInDays(
         new Date(endDate),
         new Date(lastDayOff)
@@ -67,6 +74,9 @@ const useSummaryPageData = (): SummaryPageData => {
             numDaysDrills,
             numDaysTools,
             numDaysNothing,
+            lastRowId,
+            lastDateAsString,
+            isTodayInDb,
         },
     };
 };
