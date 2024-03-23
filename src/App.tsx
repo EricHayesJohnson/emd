@@ -3,7 +3,7 @@ import { AppProvider, Page } from '@shopify/polaris';
 import enTranslations from '@shopify/polaris/locales/en.json';
 import SummaryPage from './pages/SummaryPage';
 import { MobileViewProvider } from './providers/MobileViewProvider';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import SubmitForm from './components/SubmitForm';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
         <div className="App">
             <AppProvider i18n={enTranslations}>
                 <MobileViewProvider>
-                    <BrowserRouter>
+                    <Router>
                         <Page>
                             <Routes>
                                 <Route path="/emd" element={<SummaryPage />} />
@@ -22,7 +22,7 @@ function App() {
                                 />
                             </Routes>
                         </Page>
-                    </BrowserRouter>
+                    </Router>
                 </MobileViewProvider>
             </AppProvider>
         </div>
