@@ -14,12 +14,12 @@ function App() {
                     <Router>
                         <Page>
                             <Routes>
-                                <Route path="/emd" element={<SummaryPage />} />
-                                <Route path="*" element={<SummaryPage />} />
+                                <Route path="/" element={<SummaryPage />} />
                                 <Route
-                                    path="emd/update"
+                                    path="/update"
                                     element={<SubmitForm />}
                                 />
+                                <Route path="*" element={<SummaryPage />} />
                             </Routes>
                         </Page>
                     </Router>
