@@ -12,6 +12,7 @@ export type ChartDataDbResponse = {
 };
 
 export type SummaryPageData = {
+    isLoading: boolean;
     data: {
         startDate?: string;
         endDate?: string;

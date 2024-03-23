@@ -5,9 +5,11 @@ import { ChartDataDbResponse, SummaryPageData, Task } from '../types';
 import { todayFormatForDb } from '../utils/dateUtils';
 
 const useSummaryPageData = (): SummaryPageData => {
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [dataFromDb, setDataFromDb] = useState<ChartDataDbResponse[] | null>(
         []
     );
+
     useEffect(() => {
         // adds delay to allow for loading state
         setTimeout(() => getAppData(), 2000);
@@ -16,6 +18,7 @@ const useSummaryPageData = (): SummaryPageData => {
     const getAppData = async () => {
         const { data } = await supabase.from(DBTable.SUMMARY_PAGE).select();
         setDataFromDb(data);
+        setIsLoading(false);
     };
 
     const sortedData = dataFromDb?.sort((a, b) => {
@@ -64,6 +67,7 @@ const useSummaryPageData = (): SummaryPageData => {
     );
 
     return {
+        isLoading,
         data: {
             startDate,
             endDate,
