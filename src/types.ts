@@ -32,6 +32,7 @@ export type SummaryPageData = {
 export type HeadingProps = {
     startDate?: string;
     endDate?: string;
+    isLoading: boolean;
 };
 
 export type MetricCardsProps = {

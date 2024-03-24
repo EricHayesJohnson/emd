@@ -7,10 +7,14 @@ import useSummaryPageData from '../../hooks/useSummaryPageData';
 import { styles } from './SummaryPage.style';
 
 const SummaryPage: React.FC = () => {
-    const { data } = useSummaryPageData();
+    const { data, isLoading } = useSummaryPageData();
     return (
         <div style={styles.SummaryPageWrapper}>
-            <Heading startDate={data.startDate} endDate={data.endDate} />
+            <Heading
+                startDate={data.startDate}
+                endDate={data.endDate}
+                isLoading={isLoading}
+            />
             <MetricCards
                 currentRatio={data.currentRatio}
                 currentStreak={data.currentStreak}
